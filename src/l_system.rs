@@ -14,6 +14,10 @@ pub enum Error {
 
 #[derive(Debug)]
 /// Lindenmayer system.
+/// TODO: the alphabet could be a string (easier for the user to create) that we then deduplicate
+/// TODO: an easy potential optimization would be to figure out what tokens of the alphabet are terminals by subtracting
+/// the tokens appearing in an action from the alphabet. Then, if the remaining string starts with a terminal, we can
+/// move to the next as no rule should match.
 pub struct LSystem {
   alphabet: HashSet<char>,
   axiom: String,

@@ -6,3 +6,4 @@ edition = "2018"
 repository = "https://github.com/Robzz/lsys"
 
 [dependencies]
+imageproc = "0.20"

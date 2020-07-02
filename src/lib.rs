@@ -3,6 +3,7 @@
 
 mod action;
 mod l_system;
+mod render;
 mod rule;
 
 pub use action::Action;

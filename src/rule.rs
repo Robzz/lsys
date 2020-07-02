@@ -1,4 +1,4 @@
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Clone)]
 /// Describes a rule match.
 pub struct Match<'a> {
   len: usize,
@@ -41,5 +41,25 @@ impl Rule {
     } else {
       None
     }
+  }
+}
+
+#[cfg(test)]
+mod tests {
+  use super::{Rule, Match};
+
+  #[test]
+  fn test_failed_match() {
+    let rule = Rule::new("A".to_owned(), "B".to_owned());
+    let m = rule.matches("BBC");
+    assert!(m.is_none());
+  }
+
+  #[test]
+  fn test_successful_match() {
+    let rule = Rule::new("A".to_owned(), "B".to_owned());
+    let m = rule.matches("ABC");
+    assert!(m.is_some());
+    assert_eq!(m.unwrap(), Match { len: 1, rewrite: "B"})
   }
 }
