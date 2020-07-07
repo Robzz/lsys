@@ -15,7 +15,7 @@ pub trait Renderer {
     type Output;
 
     /// Render the given L-system.
-    fn render(&self, system: LSystem) -> Self::Output;
+    fn render(&self, system: &LSystem) -> Self::Output;
 }
 
 /// Renders L-systems to color images.
@@ -26,11 +26,11 @@ pub struct ImageRenderer {
 impl Renderer for ImageRenderer {
     type Output = RgbImage;
 
-    fn render(&self, system: LSystem) -> RgbImage {
+    fn render(&self, system: &LSystem) -> RgbImage {
         let mut img = RgbImage::new(1280, 1024);
         let actions = system.actions();
         let mut turtle = Turtle::new();
-        turtle.set_position(Point2::new(640., 1000.));
+        turtle.set_position(Point2::new(640., 512.));
         turtle.set_orientation(FRAC_PI_2);
 
         for c in system.state().chars() {

@@ -1,9 +1,12 @@
-use lsys::{Action, LSystem, Rule};
+use lsys::{Action, ImageRenderer, LSystem, Renderer, Rule};
 
-use std::collections::HashMap;
+use std::{
+    collections::HashMap,
+    f64::consts::PI
+};
 
 const STEP_DISTANCE: f64 = 20.;
-const STEP_ANGLE: f64 = 120.;
+const STEP_ANGLE: f64 = 2. * PI / 3.;
 
 fn main() -> () {
     let axiom = "F-G-G".to_owned();
@@ -26,7 +29,8 @@ fn main() -> () {
     for i in 0..5 {
         system.step().unwrap();
         println!("System after iteration {}: {}", i, system.state());
+        let renderer = ImageRenderer::new();
+        let img = renderer.render(&system);
+        img.save(format!("img_iter_{}.png", i)).unwrap();
     }
-
-    let renderer = ImageRenderer::new();
 }
